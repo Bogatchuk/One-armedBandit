@@ -1,0 +1,6 @@
+framework module Pods_One_armedBandit {
+  umbrella header "Pods-One-armedBandit-umbrella.h"
+
+  export *
+  module * { export * }
+}
