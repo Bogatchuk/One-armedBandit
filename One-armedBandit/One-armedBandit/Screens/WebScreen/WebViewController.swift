@@ -10,13 +10,11 @@ import UIKit
 import WebKit
 
 class WebViewController: UIViewController {
- // private var webView: WKWebView!
-  @IBOutlet weak var webView: WKWebView!
+  @IBOutlet private weak var webView: WKWebView!
   private let url = URL(string: "https://html5test.com/")!
   override func viewDidLoad() {
     super.viewDidLoad()
-//    webView = WKWebView()
-//    view = webView
+
     
     let request = URLRequest(url: url)
     webView.load(request)
@@ -25,6 +23,6 @@ class WebViewController: UIViewController {
     
   }
   @IBAction func resetButtonClicked(_ sender: UIButton) {
-    UserDefaults.standard.removeObject(forKey: "Allow")
+    UserDefaultsManager.shared.removeInUserDefaults(key: allow)
   }
 }

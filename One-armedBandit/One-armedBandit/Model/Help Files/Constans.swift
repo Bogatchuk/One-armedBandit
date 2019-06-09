@@ -1,5 +1,5 @@
 //
-//  Game.swift
+//  Constans.swift
 //  One-armedBandit
 //
 //  Created by Bogatchuk Roman on 6/9/19.
@@ -7,10 +7,9 @@
 //
 
 import Foundation
+let urlServer = "https://api.myjson.com/bins/w6e65"
+let bet = 10
+let win = 30
+let jackpot = 100
+let allow = "Allow"
 
-struct GameModel {
-  var money:Int
-  var numberOne:Int
-  var numberTwo:Int
-  var numberThree:Int
-}

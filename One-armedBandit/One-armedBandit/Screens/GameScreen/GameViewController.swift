@@ -9,39 +9,47 @@
 import UIKit
 
 class GameViewController: UIViewController {
-
-  @IBOutlet weak var numberOne: UILabel!
-  @IBOutlet weak var numberTwo: UILabel!
-  @IBOutlet weak var numberThree: UILabel!
-  @IBOutlet weak var moneyLabel: UILabel!
-  @IBOutlet weak var betLabel: UILabel!
-  @IBOutlet weak var depositTextField: UITextField!
-  @IBOutlet weak var startButton: UIButton!
-  var deposit:Int!
-  var game = GameModel()
+  
+  @IBOutlet private weak var numberOne: UILabel!
+  @IBOutlet private weak var numberTwo: UILabel!
+  @IBOutlet private weak var numberThree: UILabel!
+  @IBOutlet private weak var moneyLabel: UILabel!
+  @IBOutlet private weak var betLabel: UILabel!
+  @IBOutlet private weak var depositTextField: UITextField!
+  @IBOutlet private weak var startButton: UIButton!
+  
+  private var game:Game!
   override func viewDidLoad() {
-        super.viewDidLoad()
+    super.viewDidLoad()
+    game = Game()
     startButton.isEnabled = false
-    }
+  }
   @IBAction func depositButtonClicked(_ sender: UIButton) {
-    deposit = Int(depositTextField.text!)
-    game.money = deposit
-    moneyLabel.text = "Деньги: \(game.money!)$"
+    guard let deposit = Int(depositTextField.text!) else {
+      showAlert(with: "Ошибка", and: "Введите целое число кратное 10!")
+      return
+    }
+    if deposit % 10 != 0 {
+      showAlert(with: "Ошибка", and: "Введите целое число кратное 10!")
+      return
+    }
+    game.addMoney(deposit: deposit)
+    moneyLabel.text = game.showDeposit()
     startButton.isEnabled = true
   }
   @IBAction func startButtonClicked(_ sender: UIButton) {
     game.step()
     
-    numberOne.text = String(describing: game.numberOne!)
-    numberTwo.text = String(describing: game.numberTwo!)
-    numberThree.text = String(describing: game.numberThree!)
-    moneyLabel.text = "Деньги: \(game.money!)$"
+    numberOne.text = game.getCell(cell: .one)
+    numberTwo.text = game.getCell(cell: .two)
+    numberThree.text = game.getCell(cell: .three)
+    moneyLabel.text = game.showDeposit()
     
-    if game.money <= 0{
-      startButton.isEnabled = false
-    }
+    
+    startButton.isEnabled = game.isPlayingAvailable()
+    
   }
   @IBAction func resetButtonClick(_ sender: UIButton) {
-    UserDefaults.standard.removeObject(forKey: "Allow")
+    UserDefaultsManager.shared.removeInUserDefaults(key: allow)
   }
 }

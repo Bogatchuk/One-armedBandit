@@ -1,5 +1,5 @@
 //
-//  Game.swift
+//  CellNumber.swift
 //  One-armedBandit
 //
 //  Created by Bogatchuk Roman on 6/9/19.
@@ -8,9 +8,8 @@
 
 import Foundation
 
-struct GameModel {
-  var money:Int
-  var numberOne:Int
-  var numberTwo:Int
-  var numberThree:Int
+enum CellNumber {
+  case one
+  case two
+  case three
 }
