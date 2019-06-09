@@ -11,9 +11,9 @@ class Router {
   static let shared = Router()
   private init(){}
   
-//  private let gameViewController: UIViewController = GameViewController()
-//  private let webViewController: UIViewController = WebViewController()
-  private let allowResut = UserDefaults.standard.bool(forKey: allow)
+  //  private let gameViewController: UIViewController = GameViewController()
+  //  private let webViewController: UIViewController = WebViewController()
+  // private var allowResut = UserDefaults.standard.bool(forKey: allow)
   //private let allow = true
   
   
@@ -22,19 +22,33 @@ class Router {
     window = UIWindow(frame: frame)
     window?.makeKeyAndVisible()
     
+    //    if !UserDefaultsManager.shared.isKeyPresentInUserDefaults(key: allow){
+    //      GameNetworkService.shered.getData()
+    //    }
+    
+    //
+    //    UserDefaults.standard.set(result, forKey: allow)
+    //    UserDefaults.standard.synchronize()
     if !UserDefaultsManager.shared.isKeyPresentInUserDefaults(key: allow){
-      GameNetworkService.shered.getData()
+      print(UserDefaultsManager.shared.isKeyPresentInUserDefaults(key: allow))
+    GameNetworkService.shered.getData { result in
+      UserDefaults.standard.set(result, forKey: allow)
+      print(UserDefaults.standard.bool(forKey: allow))
+      UserDefaults.standard.synchronize()
     }
-    
-    if !allowResut {
-      let webViewController: UIViewController = WebViewController()
-      window?.rootViewController = webViewController
-    } else {
-      let gameViewController: UIViewController = GameViewController()
-      window?.rootViewController = gameViewController
-    }
-    
   }
   
+  let allowResut = UserDefaults.standard.bool(forKey: allow)
+  
+  if allowResut {
+  let webViewController: UIViewController = WebViewController()
+  window?.rootViewController = webViewController
+  } else {
+  let gameViewController: UIViewController = GameViewController()
+  window?.rootViewController = gameViewController
+  }
+  
+}
+
 }
 

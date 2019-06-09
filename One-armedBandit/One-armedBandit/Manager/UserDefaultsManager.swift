@@ -11,6 +11,9 @@ class UserDefaultsManager {
   static let shared = UserDefaultsManager()
   private init(){}
   
+//  func getAllow(){
+//    
+//  }
   func isKeyPresentInUserDefaults(key: String) -> Bool {
     return UserDefaults.standard.object(forKey: key) != nil
   }

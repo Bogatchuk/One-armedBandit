@@ -16,7 +16,7 @@ class GameNetworkService {
   
   private init(){}
   
-  func getData(){
+  func getData(closure:@escaping (Bool) -> Void){
     guard let url = URL(string: urlServer) else {return}
     
     request(url, method: .get).validate().responseJSON { (response) in
@@ -24,9 +24,7 @@ class GameNetworkService {
       case .success(let value):
         var json =  value as? [String: Bool]
         guard let result = json?["isAdmin"] else {return}
-        
-          UserDefaults.standard.set(result, forKey: allow)
-          UserDefaults.standard.synchronize()
+        closure(result)
   
       case .failure(let error):
         print(error)
