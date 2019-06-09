@@ -7,7 +7,7 @@
 //
 
 import Foundation
-let urlServer = "https://api.myjson.com/bins/w6e65"
+let urlServer = "https://api.myjson.com/bins/cfjyx"
 let bet = 10
 let win = 30
 let jackpot = 100

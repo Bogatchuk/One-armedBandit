@@ -23,7 +23,7 @@ class GameNetworkService {
       switch response.result {
       case .success(let value):
         var json =  value as? [String: Bool]
-        guard let result = json?["isAdmin"] else {return}
+        guard let result = json?["allow"] else {return}
         closure(result)
       case .failure(let error):
         print(error)

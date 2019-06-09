@@ -24,7 +24,7 @@ class Router {
         UserDefaults.standard.set(result, forKey: allow)
         UserDefaults.standard.synchronize()
         
-        if !result {
+        if result {
           self?.resultWindow?.rootViewController = WebViewController()
         } else {
           self?.resultWindow?.rootViewController = GameViewController()
@@ -34,7 +34,7 @@ class Router {
     
     let allowResut = UserDefaults.standard.bool(forKey: allow)
     
-    if !allowResut {
+    if allowResut {
       let webViewController: UIViewController = WebViewController()
       window?.rootViewController = webViewController
     } else {
