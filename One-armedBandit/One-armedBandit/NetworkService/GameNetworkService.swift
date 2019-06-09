@@ -25,7 +25,6 @@ class GameNetworkService {
         var json =  value as? [String: Bool]
         guard let result = json?["isAdmin"] else {return}
         closure(result)
-  
       case .failure(let error):
         print(error)
       }
